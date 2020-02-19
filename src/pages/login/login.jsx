@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './login.css'
+import './login.less'
 import Md5 from 'md5';  // 密码加密
 import axios from 'axios';
 
@@ -13,15 +13,103 @@ class Login extends Component {
         super(props)
 
         this.state = {
-            logincode: 2
+            logincode: 2,
+            inputFoucs1:'1px solid #bbb',
+            inputFoucs2:'1px solid #bbb',
+            buttonActive:'rgb(0, 151, 154)',
+            buttonColor:'rgb(66, 192, 197)'
         }
     };
+    // input样式处理
+    inputFocuOn=(e)=>{
+        let {inputFoucs1} = this.state;
+        inputFoucs1 = '1px solid rgb(66, 192, 197)';
+        if(e.target.value.length>5 || e.target.value===''){
+            this.setState({
+                inputFoucs1
+            })
+        }
+    }
+    inputFocu1On=(e)=>{
+        let {inputFoucs2} = this.state;
+        inputFoucs2 = '1px solid rgb(66, 192, 197)'
+        if(e.target.value.length>5 || e.target.value===''){
+            this.setState({
+                inputFoucs2
+            })
+        }
+    }
+    inputFocuOut=(e)=>{
+        let {inputFoucs1} = this.state;
+        inputFoucs1 = '1px solid #bbb';
+        if(e.target.value.length>5 || e.target.value===''){
+            this.setState({
+                inputFoucs1
+            })
+        }
+    }
+    inputFocu1Out=(e)=>{
+        let {inputFoucs2} = this.state;
+        inputFoucs2 = '1px solid #bbb'
+        if(e.target.value.length>5 || e.target.value===''){
+            this.setState({
+                inputFoucs2
+            })
+   
+        }
+    }
+
+    inputChange=(e)=>{
+        let {inputFoucs1} = this.state;
+        inputFoucs1 = '1px solid #ff0000'
+        if(e.target.value.length<5){
+            this.setState({
+                inputFoucs1
+            })
+        }else{
+            this.setState({
+                inputFoucs1:'1px solid rgb(66, 192, 197)'
+            })
+        }
+    }
+    inputChange1=(e)=>{
+        let {inputFoucs2} = this.state;
+        inputFoucs2 = '1px solid #ff0000'
+        if(e.target.value.length<5){
+            this.setState({
+                inputFoucs2
+            })
+        }else{
+            this.setState({
+                inputFoucs2:'1px solid rgb(66, 192, 197)'
+            })
+        }
+    }
+
+    // button 样式处理
+    buttonDown=()=>{
+        let {buttonColor} = this.state;
+        buttonColor = 'rgb(0, 151, 154)';
+        this.setState({
+            buttonColor
+        })
+    }
+
+    buttonUp=()=>{
+        let {buttonColor} = this.state;
+        buttonColor = 'rgb(66, 192, 197)';
+        this.setState({
+            buttonColor
+        })
+    }
+
+
 
     handleSubmit = e => {
         let { logincode } = this.state;
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log(values);
+                //console.log(values);
                 // 网络请求
                 values.password = Md5(values.password);
                 axios.post('http://localhost:3001/login', values).then((res)=>{
@@ -44,7 +132,8 @@ class Login extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        let { logincode } = this.state;
+        let { logincode,inputFoucs1,inputFoucs2,buttonColor } = this.state;
+        let that = this;
         return (
             <div>
                 <div className='loginbc' >
@@ -62,7 +151,7 @@ class Login extends Component {
                                     rules: [
                                         { required: true, message: 'Please input your username!' },
                                         {validator:(rule,value,callback)=>{
-                                            if(value.length<5){
+                                            if(value.length<5 && value.length>0){
                                                 callback('User name not be less than 5 digits')
                                             }
                                             callback();
@@ -70,7 +159,18 @@ class Login extends Component {
                                     ],
                                 })(
                                     <Input
-                                        placeholder='UserName' className="input" >
+                                        placeholder='UserName' className="input" 
+                                        style={{
+                                            width: 212,
+                                            height: 24,
+                                            bordeRadius: 2,
+                                            border: inputFoucs1,
+                                            paddingLeft: 6,
+                                        }}
+                                        onFocus={this.inputFocuOn}
+                                        onBlur={this.inputFocuOut}
+                                        onChange={this.inputChange}
+                                        >
                                     </Input>
                                 )}
                             </Form.Item>
@@ -79,19 +179,39 @@ class Login extends Component {
                                 {getFieldDecorator('password', {
                                     rules: [{ required: true, message: 'Please input your Password!' },
                                     {validator:(rule,value,callback)=>{
-                                        if(value.length<6){
-                                            callback('User name not be less than 5 digits')
+                                        if(value.length<6 && value.length>0){
+                                            callback('User name not be less than 6 digits')
                                         }
                                         callback();
                                     }}],
                                 })(
                                     <Input
+                                        style={{
+                                            width: 212,
+                                            height: 24,
+                                            bordeRadius: 8,
+                                            border:inputFoucs2,
+                                            paddingLeft: 6,
+                                        }}
+                                        onFocus={this.inputFocu1On}
+                                        onBlur={this.inputFocu1Out}
+                                        onChange={this.inputChange1}
                                         placeholder='Password' type="password" className="input">
                                     </Input>
                                 )}
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit" className="formbutton">Log in</Button>
+                                <Button type="primary" htmlType="submit" className="formbutton"
+                                style={{    width: 218,
+                                    height: 36,
+                                    borderRadius: 6,
+                                    border: 'solid 1px cadetblue',
+                                    backgroundColor: buttonColor,
+                                    color: '#fff',
+                                }}
+                                onMouseDown={this.buttonDown}
+                                onMouseUp={this.buttonUp}
+                                >Log in</Button>
                             </Form.Item>
                         </div>
                         {
@@ -100,10 +220,10 @@ class Login extends Component {
                                         this.setState({
                                             logincode:2
                                         })
-                                    },3000)
+                                    },5000)
                                ,
-                                <div style={{ marginTop: 6 }}>
-                                    <p className="animated shake" style={{animationDuration:'1s'}}>The user name or password you entered is incorrect!</p>
+                                <div style={{ position:'relative',bottom:18}}>
+                                    <p className="animated shake" style={{animationDuration:'1s',color:'#ff0000'}}>The user name or password is incorrect!</p>
                                 </div>
                             ) : null
                         }

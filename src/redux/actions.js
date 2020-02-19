@@ -1,7 +1,7 @@
 import * as TYPES from './action-types';
 
 
-let num = {
+let action = {
     increment:{
         type:'INCREMENT'
     },
@@ -10,5 +10,17 @@ let num = {
     }
 }
 
+// slide状态
+let slideState = {
+    slideState(data){
+        return {
+            type:TYPES.SLIDESTATE,
+            data:data
+        }
+    }
+}
 
-export default num;
+
+export default slideState;
+
+

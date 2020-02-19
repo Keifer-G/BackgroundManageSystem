@@ -1,6 +1,11 @@
 let Koa = require('koa');
 let router = require('koa-router')();
 let bodyparser = require('koa-bodyparser');
+let fs = require('fs');
+let path = require('path');
+
+let staticFile = require('koa-static');
+let formidable = require('formidable');
 
 const app = new Koa();
 let cors = require('koa-cors');
@@ -13,7 +18,7 @@ app.use(cors({
         return '*';
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-    maxAge: 5,
+    maxAge: 10,
     credentials: true,
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
@@ -58,7 +63,7 @@ router.post('/login', async ctx => {
         password: ctx.body.password
     });
 
-    if (JSON.stringify(loginState) ==='null') {
+    if (JSON.stringify(loginState) === 'null') {
         //console.log('finderr')
         ctx.body = JSON.stringify({
             logincode: 0
@@ -70,6 +75,48 @@ router.post('/login', async ctx => {
         });
     }
 });
+
+/* app.use(staticFile(path.resolve(__dirname, "./serverImage")))
+
+router.post('/upload',async ctx=>{
+    upLoadImg(ctx.request,ctx.response);
+})
+]*/
+
+
+router.post('/upload', async ctx => {
+
+    ctx.body = ctx.request.body;
+    //接收前台POST过来的base64
+    //过滤data:URL
+    //console.log(ctx.body, ctx.body.imgBase)
+    var imgData = ctx.body.imgBase;
+    console.log(imgData)
+    let data = Buffer.concat
+/*     var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+    var dataBuffer = new Buffer(base64Data, 'base64');
+    fs.writeFile("image.png", dataBuffer, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            let bitmap = fs.readFileSync(path.join(__dirname,'..','..','image.png'));
+
+            let base64str = Buffer.from(bitmap, 'binary').toString('base64');
+        
+            ctx.body = base64str;
+        }
+    }); */
+});
+router.get('/image',async ctx=>{
+    let bitmap = fs.readFileSync(path.join(__dirname,'..','..','image.png'));
+
+    let base64str = Buffer.from(bitmap, 'binary').toString('base64');
+
+    let image = 'data:image/png;base64,' + base64str;
+
+    ctx.body = image;
+})
+
 
 app.use(router.routes());
 app.use(router.allowedMethods()); // => 这俩一定要加哦    

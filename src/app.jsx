@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Login from './pages/login/login'
 import Admin from './pages/admin/admin'
 
-import { HashRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { HashRouter, Switch, Route, NavLink ,Redirect} from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -21,9 +21,9 @@ class App extends React.Component {
                 <HashRouter>
                     <Switch>
                         <Route path='/login' component={Login}></Route>
-                        <Route path='/admin' component={Admin}></Route>
+                        <Route path='/admin' component={Admin} history={this.props.history}></Route>
                     </Switch>
-
+                    <Redirect to='/admin'></Redirect>
                 </HashRouter>
             </div>
         )
