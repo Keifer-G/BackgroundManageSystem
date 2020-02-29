@@ -24,7 +24,7 @@ class NewsList extends Component {
     render() {
         return (
             <div >
-                <Tabs defaultActiveKey="1"  style={{ marginTop: 24, width: 640, height: 274, boxShadow: '0px 4px 10px #aaa' }}>
+                <Tabs defaultActiveKey="1"  style={{ marginTop: 24, width: 640, height: 'calc(100vh - 386px)', boxShadow: '0px 4px 10px #aaa' }}>
                     <TabPane tab="推荐" key="1">
                        <NewsItem/>
                     </TabPane>

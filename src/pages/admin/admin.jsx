@@ -5,14 +5,16 @@ import './admin.less';
 import store from '../../redux/store'
 import actions from '../../redux/actions'
 
-import { Layout, Menu,  Icon, Divider } from 'antd';
+import { Layout, Menu,  Icon} from 'antd';
 
 import Home from './adminComp/home/home';
 import About from './adminComp/about/about';
 import User from './adminComp/user/user';
 import Oprate from './adminComp/oprate/oprate';
+import PicOprate from './adminComp/oprate/picOprate';
 import Setting from './adminComp/setting/setting';
 import Show from './adminComp/show/show';
+import FindShow from './adminComp/show/findShow';
 
 import Top from '../../components/top'
 
@@ -20,9 +22,7 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 
-
 class Admin extends Component {
-
 
     constructor(props) {
         super(props)
@@ -30,8 +30,8 @@ class Admin extends Component {
         this.state = {
             themeColor: 'light',
             collapseState:false,
-            currentPage:3,
-            pages:[<Home/>,<Oprate/>,<Show/>,<User/>,<Setting/>,<About/>],
+            currentPage:0,
+            pages:[<Home/>,<PicOprate/>,<Oprate/>,<Show/>,<FindShow/>,<User/>,<Setting/>,<About/>],
         }
     }
 
@@ -64,6 +64,7 @@ class Admin extends Component {
                     onBreakpoint={broken => {
                         //console.log(broken);
                     }}
+                    
                     onCollapse={(collapsed, type) => {
                         dispatch(actions.slideState(collapsed));
                     }}
@@ -89,12 +90,12 @@ class Admin extends Component {
                             }
                         >
                             <Menu.Item key="1" onClick={this.pageChange}>
-                                <Icon type="shop"></Icon>
-                                <span>nav2</span>
+                                <Icon type="layout"></Icon>
+                                <span>视图操作</span>
                             </Menu.Item>
-                            <Menu.Item key="10">
-                                <Icon type="shop"></Icon>
-                                <span>nav2</span>
+                            <Menu.Item key="2" onClick={this.pageChange}>
+                                <Icon type="profile"></Icon>
+                                <span>图表管理</span>
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2"
@@ -105,24 +106,24 @@ class Admin extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item key="2" onClick={this.pageChange}>
-                                <Icon type="shop"></Icon>
-                                <span>nav2</span>
+                            <Menu.Item key="3" onClick={this.pageChange}>
+                                <Icon type="robot"></Icon>
+                                <span>数据预览</span>
                             </Menu.Item>
-                            <Menu.Item key="8">
-                                <Icon type="shop"></Icon>
-                                <span>nav2</span>
+                            <Menu.Item key="4"  onClick={this.pageChange}>
+                                <Icon type="block"></Icon>
+                                <span>动态数据</span>
                             </Menu.Item>
                         </SubMenu>
-                            <Menu.Item key="3" onClick={this.pageChange}>
+                            <Menu.Item key="5" onClick={this.pageChange}>
                                 <Icon type="user"></Icon>
                                 <span>用户</span>
                             </Menu.Item>
-                        <Menu.Item key="4" onClick={this.pageChange}>
+                        <Menu.Item key="6" onClick={this.pageChange}>
                             <Icon type="tool" />
                             <span className="nav-text">设置</span>
                         </Menu.Item>
-                        <Menu.Item key="5" onClick={this.pageChange}>
+                        <Menu.Item key="7" onClick={this.pageChange}>
                             <Icon type="team" />
                             <span className="nav-text">关于设计</span>
                         </Menu.Item>
@@ -130,7 +131,7 @@ class Admin extends Component {
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0,paddingLeft:24 ,boxShadow:'0 2px 8px #ccc'}}>
-                        <Top  history={this.props.history}/>
+                        <Top  history={this.props.history} onClicked={this.onClicked}/>
                     </Header>
                     <Content style={{ margin: '8px 0px 0' }}>
                         <div style={{ padding: 24, paddingTop:16,paddingBottom:16,background: '#fff', minHeight: 580 }}>

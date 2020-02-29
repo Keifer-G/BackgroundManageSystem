@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './login.less'
+import './login.less';
 import Md5 from 'md5';  // 密码加密
 import axios from 'axios';
-
-import LoginCss from './logonComp/logincss'
+import store from '../../redux/store';
+import actions from '../../redux/actions';
+import LoginCss from './logonComp/logincss';
 
 import { Form, Input, Button, Icon } from 'antd';
 
@@ -17,7 +18,8 @@ class Login extends Component {
             inputFoucs1:'1px solid #bbb',
             inputFoucs2:'1px solid #bbb',
             buttonActive:'rgb(0, 151, 154)',
-            buttonColor:'rgb(66, 192, 197)'
+            buttonColor:'rgb(66, 192, 197)',
+            adminInfo:{}
         }
     };
     // input样式处理
@@ -106,6 +108,7 @@ class Login extends Component {
 
 
     handleSubmit = e => {
+        let {getState,subscribe,dispatch}= store;
         let { logincode } = this.state;
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -114,15 +117,32 @@ class Login extends Component {
                 values.password = Md5(values.password);
                 axios.post('http://localhost:3001/login', values).then((res)=>{
                     if(!res){
-                        return;
-                    }else{
-                        logincode = res.data.logincode
                         this.setState({
-                            logincode
+                            logincode:3
                         })
-
-                        if(logincode===1){
-                            this.props.history.push('/admin');
+                    }else{
+                        if(res.data.logincode===0){
+                            this.setState({
+                                logincode:0
+                            })
+                        }else{
+                            let adminInfoa =res.data.data.loginState
+                            logincode = res.data.logincode
+                            //console.log(adminInfo)
+                            //document.cookie='adminInfo' + '=' + adminInfo;
+                            //console.log(document.cookie)
+                            this.setState({
+                                logincode
+                            })
+    
+                            dispatch(actions.adminInfo(adminInfoa))
+                            
+                            //console.log(getState().adminInfo)
+                            if(logincode===1){
+                                setTimeout(()=>{
+                                    this.props.history.push('/admin');
+                                },0)
+                            }
                         }
                     }
                 })
@@ -130,7 +150,24 @@ class Login extends Component {
         });
     }
 
+
+componentWillUnmount() {
+    this.setState = (state, callback) => {
+        return state;
+    }
+}
+
     render() {
+        let {getState,subscribe}= store;
+        let storeAdminInfo = getState().adminInfo;
+        subscribe(()=>{
+            let { adminInfo } = this.state;
+            adminInfo = storeAdminInfo;
+            this.setState({
+                adminInfo
+            })
+        })
+
         const { getFieldDecorator } = this.props.form;
         let { logincode,inputFoucs1,inputFoucs2,buttonColor } = this.state;
         let that = this;

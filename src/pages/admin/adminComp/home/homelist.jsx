@@ -84,7 +84,7 @@ class HomeList extends Component {
         let { listData,collapseState } = this.state;
 
         return (
-            <div className='wrapper' style={{ marginLeft: 24, boxShadow: '0px 4px 10px #aaa',height:540,overflow:'hidden' }}>
+            <div className='wrapper' style={{ marginLeft: 24, boxShadow: '0px 4px 10px #aaa',height:'calc(100vh - 120px)',overflow:'hidden' }}>
                 <div className='content'>
                     <List
                         itemLayout="vertical"
@@ -95,9 +95,9 @@ class HomeList extends Component {
                             <List.Item
                                 key={item.title}
                                 actions={[
-                                    <IconText type="star-o" text="99+" key="list-vertical-star-o" />,
-                                    <IconText type="like-o" text="99+" key="list-vertical-like-o" />,
-                                    <IconText type="message" text="99+" key="list-vertical-message" />,
+                                    <IconText type="star-o" text="99" key="list-vertical-star-o" />,
+                                    <IconText type="like-o" text="99" key="list-vertical-like-o" />,
+                                    <IconText type="message" text="99" key="list-vertical-message" />,
                                 ]}
                                 extra={
                                     <img
@@ -118,7 +118,7 @@ class HomeList extends Component {
                             </List.Item>
                         )}
                     />
-                    <a href="javascript:;" style={{color:"#666"}}><p onClick={this.listMore} style={{fontSize:16,textAlign:"center",paddingBottom:12,paddingTop:12}}>加载更多······</p></a>
+                    <a style={{color:"#666"}}><p onClick={this.listMore} style={{fontSize:16,textAlign:"center",paddingBottom:12,paddingTop:12}}>加载更多······</p></a>
                 </div>
             </div>
         );

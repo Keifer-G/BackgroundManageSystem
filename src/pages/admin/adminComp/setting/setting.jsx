@@ -1,83 +1,58 @@
-import React,{Component} from 'react';
-import {Upload,message,Icon} from 'antd';
-import axios from 'axios';
+import React, { Component } from 'react';
 
 
-// base64对图片进行转化
-function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-}
-
-// 设置文件大小
-function beforeUpload(file) {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-    }
-    return isJpgOrPng && isLt2M;
-}
-
-
-class Setting extends Component{
-    constructor(props){
+class Setting extends Component {
+    constructor(props) {
         super(props)
 
-        this.state = {
-            imageUrl: '',
-            loading: false,
-        }
     }
 
-/*     handleChange = info => {
-        if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
-            return;
-        }
-    }
-
-    self = info => {
-        getBase64( info.file,imageUrl=>{
-            axios.post('http://localhost:3001/upload', { imgBase: imageUrl }).then((res)=>{
-                console.log(res)
-                this.setState({
-                    imageUrl:res.data.imgBase,
-                    loading: false,
-                })
-        })
-        })
-    }
- */
-
-    render(){
-        const uploadButton = (
-            <div>
-                <Icon type={this.state.loading ? 'loading' : 'plus'} />
-                <div className="ant-upload-text">Upload</div>
-            </div>
-        );
-        const { imageUrl } = this.state;
+    render() {
         return (
-            <div>
-            <h1>我是设置</h1>
-{/*             <Upload
-                        name="avatar"
-                        listType="picture-card"
-                        className="avatar-uploader"
-                        showUploadList={false}
-                        customRequest={
-                            this.self
-                        }
-                        beforeUpload={beforeUpload}
-                        onChange={this.handleChange}
-                    >
-                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-                    </Upload> */}
+            <div >
+
+                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div className='changeTheme' style={{ width: '50%', height: 70, }}>
+                        <div style={{ borderRadius: 8, boxShadow: '0 2px 5px #aaa', 
+                            fontSize: 16, height: 63, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <p style={{fontWeight:500,color:'#333'}}>变更您的主题:</p>
+
+                        </div>
+                        <div style={{  borderRadius: 8, boxShadow: '0 2px 5px #aaa', marginTop:24 ,fontSize: 16, height: 70, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <p style={{}}>变更您的主题:</p>
+
+                        </div>
+
+                        <div style={{  borderRadius: 8, boxShadow: '0 2px 5px #aaa', marginTop:24 ,fontSize: 16, height: 70, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <p style={{}}>变更您的主题:</p>
+
+                        </div>
+
+                        <div style={{  borderRadius: 8, boxShadow: '0 2px 5px #aaa', marginTop:24 ,fontSize: 16, height:70, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <p style={{}}>变更您的主题:</p>
+
+                        </div>
+
+                        <div style={{  borderRadius: 8, boxShadow: '0 2px 5px #aaa', marginTop:24 ,fontSize: 16, height: 70, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <p style={{}}>变更您的主题:</p>
+  
+                        </div>
+
+                        <div style={{  borderRadius: 8, boxShadow: '0 2px 5px #aaa', marginTop:24 ,fontSize: 16, height: 70, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <p style={{}}>变更您的主题:</p>
+
+                        </div>
+                        
+                    </div>      
+
+
+
+                    <div className='changeTheme' style={{marginLeft:24, width: '50%', height: 540, display: 'flex', justifyContent: 'space-around', alignItems: 'center', borderRadius: 8, boxShadow: '0 2px 5px #aaa' }}>
+                        <p style={{ fontSize: 16}}>变更您的主题:</p>
+
+                    </div>
+  </div>
+
             </div>
         )
     }

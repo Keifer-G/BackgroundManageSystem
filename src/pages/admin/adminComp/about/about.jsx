@@ -7,8 +7,8 @@ class About extends Component{
 
     render(){
         return (
-            <div>
-<h1>我是关于</h1>
+            <div style={{display:'flex',justifyContent:'center',marginTop:240}}>
+                <p>欢迎您使用由keifer设计的后台管理系统</p>
             </div>
         )
     }

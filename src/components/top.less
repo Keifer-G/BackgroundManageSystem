@@ -1,11 +1,9 @@
 .loginout{
-    border: none;
-    height: 100%px;
+    color: #666;
 }
 
 .loginout:hover{
-    .logt{color: rgb(5, 141, 132); font-size: 14px;transition: ease-in .2s;}
-    .loginout{ boder:1px solid rgb(249, 89, 44); }
+    .logt{color: rgb(91, 91, 91); font-weight: 600;font-size:14px;transition: ease-in .2s;}
 }
 
 .avadar:hover{
@@ -18,3 +16,26 @@
     margin-top: 4px;
 }
 
+.guangbo{
+    position: relative;
+    left: 100%;
+    animation: guangbo 30s linear infinite ;
+}
+
+@keyframes guangbo{
+    0%{
+        left: 100%;
+    }
+    25%{
+        left: 50%px;
+    }
+    50%{
+        left: 0;
+    }
+    75%{
+        left: -50%;
+    }
+    100%{
+        left: -100%;
+    }
+}

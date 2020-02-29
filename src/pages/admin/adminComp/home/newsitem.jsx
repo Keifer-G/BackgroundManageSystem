@@ -36,33 +36,33 @@ class NewsItem extends Component {
     render() {
         let { newsList } = this.state;
         return (
-                <div className="wrapper2  " style={{ width: 640, height: 202, borderRadius: 4, overflow: 'hidden' }}>
+                <div className="wrapper2  " style={{ width: 640, height: 'calc(100vh - 462px)', borderRadius: 4, overflow: 'hidden' }}>
                     <div className="content1" >
 
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div style={{ marginLeft: 16, fontSize: 16, width: 294 }}>
-                                <a href="javascript:;" style={{ color: '#666' }}><p className="titlehover">武汉加油！我们来啦！</p></a>
-                                <a href="javascript:;" style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
+                                <a style={{ color: '#666' }}><p className="titlehover">武汉加油！我们来啦！</p></a>
+                                <a style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
                                     全国行动，为武汉加油，直至今天早上7点，全国范围内除湖北，增长人数均为个位数······
                                         </p></a>
                                 <Divider style={{ marginTop: 12, marginBottom: 8 }} />
 
-                                <a href="javascript:;" style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
-                                <a href="javascript:;" style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
-                                    全国行动，为武汉加油，直至今天早上7点，全国范围内除湖北，增长人数均为个位数······
-                                        </p></a>
-
-                                <Divider style={{ marginTop: 12, marginBottom: 8 }} />
-
-                                <a href="javascript:;" style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
-                                <a href="javascript:;" style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
+                                <a style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
+                                <a  style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
                                     全国行动，为武汉加油，直至今天早上7点，全国范围内除湖北，增长人数均为个位数······
                                         </p></a>
 
                                 <Divider style={{ marginTop: 12, marginBottom: 8 }} />
 
-                                <a href="javascript:;" style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
-                                <a href="javascript:;" style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
+                                <a  style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
+                                <a style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
+                                    全国行动，为武汉加油，直至今天早上7点，全国范围内除湖北，增长人数均为个位数······
+                                        </p></a>
+
+                                <Divider style={{ marginTop: 12, marginBottom: 8 }} />
+
+                                <a style={{ color: '#666' }}><p className="titlehover">中国疾控：尚无证据表明医疗机构中发生超级传播者事件</p></a>
+                                <a style={{ color: '#999' }}> <p style={{ fontSize: 12 }}>
                                     全国行动，为武汉加油，直至今天早上7点，全国范围内除湖北，增长人数均为个位数······
                                         </p></a>
                                 <Divider style={{ marginTop: 12, marginBottom: 8 }} />
@@ -113,7 +113,7 @@ class NewsItem extends Component {
                                 return item;
                             })
                         }
-                        <a href="javascript:;" onClick={this.loadMore} style={{ color: '#999' }}><p style={{ textAlign: "center", paddingBottom: 8 }}>加载更多······</p></a>
+                        <a onClick={this.loadMore} style={{ color: '#999' }}><p style={{ textAlign: "center", paddingBottom: 8 }}>加载更多······</p></a>
                     </div>
                 </div>
         )
